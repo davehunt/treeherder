@@ -45,7 +45,7 @@ def test_get_user(username, email, user, exp_exception):
                           ])
 def test_get_email(result, exp_email):
     tca = TaskclusterAuthBackend()
-    email = tca._get_email(result["clientId"])
+    email = tca._get_email_from_clientid(result["clientId"])
     assert email == exp_email
 
 

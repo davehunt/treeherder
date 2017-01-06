@@ -38,9 +38,9 @@ class TaskclusterAuthBackend(object):
          'expires': '2016-10-31T17:40:45.692Z'}
     """
 
-    def _get_email(self, client_id):
+    def _get_email_from_clientid(self, client_id):
         """
-        Get the user's email from the mozilla-user scope
+        Extract the user's email from the client_id
 
         For more info on scopes:
         https://docs.taskcluster.net/manual/3rdparty#authenticating-with-scopes
@@ -98,7 +98,7 @@ class TaskclusterAuthBackend(object):
             raise TaskclusterAuthenticationFailedException(result["message"])
 
         client_id = result["clientId"]
-        email = self._get_email(client_id)
+        email = self._get_email_from_clientid(client_id)
         # TODO: remove this size limit when we upgrade to django 1.10
         # in Bug 1311967
         if len(client_id) <= 30:
